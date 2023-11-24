@@ -17,21 +17,21 @@ _PUBLIC_
 * void setPixel(size_t pos_x, size_t pos_y, P value) // set the pixel P with the value Value
 
 _PRIVATE_:
-2D_array<Pixel> data;
+* 2D_array<Pixel> data;
 
 **class AbstractReader**
-  public AbstractReader();
-  public pure virtual Data read(const std::string& path);
+* public AbstractReader();
+* public pure virtual Data read(const std::string& path);
 
 **class CSVReader(AbstractReader)**
-  public 2D_array read(const std::string& path);
+* public 2D_array read(const std::string& path);
 
 **class Output**
-  public pure virtual void output(const std::string& path);
-  protected Image& image;
-  protected std::string path;
+* public pure virtual void output(const std::string& path);
+* protected Image& image;
+* protected std::string path;
 
 **class FileOutput(Output)**
-  public FileOutput(Image& image);
-  public void save_in_CSV(const std::string& path);
+* public FileOutput(Image& image);
+* public void save_in_CSV(const std::string& path);
 
