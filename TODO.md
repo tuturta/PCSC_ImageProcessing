@@ -1,7 +1,7 @@
 # 1 Determiner la structure du code et faire le diagramme des classes
 
 * Un pixel est soit en RGB (structure) soit en noir et blanc (short unsigned int)
-* typedef de 2D_array = array<array<TYPE>>
+* typedef de 2D_array = array<array<'TYPE'>>
 
 **Template <Pixel> class Image** 
 _PUBLIC_
