@@ -21,10 +21,10 @@ _PRIVATE_:
 
 **class AbstractReader**
 * public AbstractReader();
-* public pure virtual Data read(const std::string& path);
+* public pure virtual 2D_array<Pixel> read(const std::string& path);
 
 **class CSVReader(AbstractReader)**
-* public 2D_array read(const std::string& path);
+* public 2D_array<Pixel> read(const std::string& path);
 
 **class Output**
 * public pure virtual void output(const std::string& path);
