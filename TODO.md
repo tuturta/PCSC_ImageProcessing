@@ -68,5 +68,5 @@ _PRIVATE_:
   - [ ] CSVReader
   - [ ] PNGReader
   - [ ] TXTReader
-  - [ ] Tests de ces classe
+  - [ ] Tests
   - [ ] Documentation
