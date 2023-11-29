@@ -1,4 +1,4 @@
-# 1 Determiner la structure du code et faire le diagramme des classes
+# 1. Determiner la structure du code et faire le diagramme des classes
 
 * Un pixel est soit en RGB (structure) soit en noir et blanc (short unsigned int)
 * typedef de 2D_array = array<array<'TYPE'>>
@@ -38,11 +38,35 @@ _PRIVATE_:
 * protected Image& image;
 * protected std::string path;
 
-**class FileOutput(Output)**
+**class CSVOutput(Output)**
 * public FileOutput(Image& image);
-* public void save_in_PNG(const std::string& path);
-* public void save_in_CSV(const std::string& path);
-* public void save_in_TXT(const std::string& path);
+* public void save(const std::string& path);
+
+**class PNGOutput(Output)**
+* public FileOutput(Image& image);
+* public void save(const std::string& path);
+  
+  **class TEXTOutput(Output)**
+* public FileOutput(Image& image);
+* public void save(const std::string& path);
 
 
+- [ ] Faire le diagramme de classe
 
+# 2. Coder les classes
+
+- [ ] Classe Image
+  - [ ] Tests
+  - [ ] Documentation
+- [ ] Classe Output
+  - [ ] CSVOutput
+  - [ ] TEXTOutput
+  - [ ] PNGOutput
+  - [ ] Tests
+  - [ ] Documentation
+- [ ] Classe AbstractReader
+  - [ ] CSVReader
+  - [ ] PNGReader
+  - [ ] TXTReader
+  - [ ] Tests de ces classe
+  - [ ] Documentation
