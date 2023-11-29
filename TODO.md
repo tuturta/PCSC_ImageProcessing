@@ -29,6 +29,9 @@ _PRIVATE_:
 **class PNGReader(AbstractReader)**
 * public Image read(const std::string& path);
 
+**class TXTReader(AbstractReader)**
+* public Image read(const std::string& path);
+
 
 **class Output**
 * public pure virtual void output(const std::string& path);
@@ -37,8 +40,9 @@ _PRIVATE_:
 
 **class FileOutput(Output)**
 * public FileOutput(Image& image);
+* public void save_in_PNG(const std::string& path);
 * public void save_in_CSV(const std::string& path);
-* public void save_in_txt(const std::string& path);
+* public void save_in_TXT(const std::string& path);
 
 
 
