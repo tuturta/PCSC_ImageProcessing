@@ -21,10 +21,14 @@ _PRIVATE_:
 
 **class AbstractReader**
 * public AbstractReader();
-* public pure virtual 2D_array<Pixel> read(const std::string& path);
+* public pure virtual Image read(const std::string& path);
 
 **class CSVReader(AbstractReader)**
-* public 2D_array<Pixel> read(const std::string& path);
+* public Image read(const std::string& path);
+
+**class PNGReader(AbstractReader)**
+* public Image read(const std::string& path);
+
 
 **class Output**
 * public pure virtual void output(const std::string& path);
@@ -34,4 +38,7 @@ _PRIVATE_:
 **class FileOutput(Output)**
 * public FileOutput(Image& image);
 * public void save_in_CSV(const std::string& path);
+* public void save_in_txt(const std::string& path);
+
+
 
