@@ -55,18 +55,19 @@ _PRIVATE_:
 
 # 2. Coder les classes
 
+- [x] Classe Pixel
 - [ ] Classe Image
   - [ ] Tests
   - [ ] Documentation
 - [ ] Classe Output
-  - [ ] CSVOutput
   - [ ] TEXTOutput
-  - [ ] PNGOutput
+  - [x] PPMOutput
   - [ ] Tests
   - [ ] Documentation
 - [ ] Classe AbstractReader
-  - [ ] CSVReader
-  - [ ] PNGReader
-  - [ ] TXTReader
+  - [x] PPMReader
+  - [x] TXTReader
   - [ ] Tests
   - [ ] Documentation
+
+- [ ] Choisir si on fait des pixels sur 8bits ou unsigned int
