@@ -49,16 +49,16 @@ vector<vector<Pixel>> readTXT(string path){
     if(file.fail()){
         cerr << "L'ouverture du fichier a fail!" << endl;
     }
-    size_t nb_rows, nb_cols, nb_channels;
+    size_t width, height, nb_channels;
     vector<uint8_t> channels;
     vector<Pixel> cols;
     vector<vector<Pixel>> image;
      
-    file >> nb_rows >> nb_cols >> nb_channels;
+    file >> width >> height >> nb_channels;
     file >> ws;
 
-    for(size_t row = 0; row < nb_rows; ++row){
-        for(size_t col = 0; col < nb_cols; ++col){
+    for(size_t row = 0; row < width; ++row){
+        for(size_t col = 0; col < height; ++col){
             for(size_t i = 0; i < nb_channels; ++i){
                 file >> input;
                 if(input < 0 or input>255){
@@ -80,13 +80,6 @@ vector<vector<Pixel>> readTXT(string path){
     return image;
 }
 
-
-// Structure to store RGB values
-struct Pixel2 {
-    int red;
-    int green;
-    int blue;
-};
 
 // Function to read a PPM image and convert it to a 2D vector
 vector<vector<Pixel>> readPPMImage(const string& filename) {
@@ -162,6 +155,34 @@ void writePPMP3(const string& filename, const vector<vector<Pixel>>& image) {
     cout << "PPM P3 file written successfully: " << filename << endl;
 }
 
+// Function to write a PPM P3 file from a 2D vector of pixels
+void writeTXT(const string& filename, const vector<vector<Pixel>>& image) {
+    // Open the PPM file for writing
+    ofstream txtFile(filename, std::ofstream::out | std::ofstream::trunc);
+
+    if (!txtFile.is_open()) {
+        cerr << "Error opening file for writing: " << filename << endl;
+        // You can handle the error as per your requirement
+        return;
+    }
+
+    // Write txt header
+    txtFile << image[0].size() << " " << image.size() << "\n";
+
+    // Write pixel values
+    for (const auto& row : image) {
+        for (const auto& pixel : row) {
+            txtFile << unsigned(pixel.get_channel_value(0)) << " " << unsigned(pixel.get_channel_value(1)) << " " << unsigned(pixel.get_channel_value(2)) << "   ";
+        }
+        txtFile << "\n"; // Newline after each row
+    }
+
+    // Close the file
+    txtFile.close();
+
+    cout << "Text file written successfully: " << filename << endl;
+}
+
 int main(){
 
     string path_txt("../in/test.txt");
@@ -174,8 +195,10 @@ int main(){
     vector<vector<Pixel>> image2 = readPPMImage(filename);
 
     // Call the function to write PPM image
-    string path = "../out/out.ppm";
-    writePPMP3(path, image2);
+    string path_ppm = "../out/out.ppm";
+    path_txt        = "../out/out.txt";
+    writePPMP3(path_ppm, image2);
+    writeTXT(path_txt, image1);
 
     return 0;
 }
