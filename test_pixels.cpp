@@ -1,5 +1,5 @@
 #include<iostream>
-#include "Pixel.hh"
+#include "src/Pixel.hh"
 
 using namespace std;
 
