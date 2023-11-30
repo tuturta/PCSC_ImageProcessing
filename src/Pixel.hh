@@ -9,13 +9,8 @@ using namespace std;
 class Pixel{
     // Constructor
     public :
-        Pixel(initializer_list<unsigned int> const& val){
-            // A Pixel can be built from a list of N positive integers
-		    for (auto i : val) { 
-                values.push_back(i); 
-            }
-            cout << "Pixel created successfully" << endl;
-        }
+        Pixel(initializer_list<unsigned int> const& val): values(val){}
+        Pixel(vector<unsigned int> channels): values(channels){}
     // Methods 
     public : 
         size_t dim();
