@@ -60,7 +60,7 @@ _PRIVATE_:
   - [ ] Tests
   - [ ] Documentation
 - [ ] Classe Output
-  - [ ] TEXTOutput
+  - [x] TEXTOutput
   - [x] PPMOutput
   - [ ] Tests
   - [ ] Documentation
