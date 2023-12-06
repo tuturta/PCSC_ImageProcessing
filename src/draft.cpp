@@ -3,10 +3,20 @@
 #include <vector>
 #include <string>
 #include <initializer_list>
-
+#include <complex>
+#include <valarray>
 
 using namespace std;
 
+typedef std::complex<double> Complex;
+typedef std::valarray<Complex> CArray;
+
+
+void fft1D(vector< complex<double> > & input); 
+void ifft1D(vector<complex<double>>& input);
+void dft(vector<complex<double>>& input);
+void idft(vector<complex<double>>& input);
+vector<complex<double>> to_complex(const vector<double> & input);
 
 // Class Pixel : a pixel is a collection of N positive integers (e.g. N=1 for grayscale pixel, N=3 for RGB pixel,...)
 class Pixel{
@@ -183,8 +193,10 @@ void writeTXT(const string& filename, const vector<vector<Pixel>>& image) {
     cout << "Text file written successfully: " << filename << endl;
 }
 
-int main(){
 
+
+int main(){
+    /*
     string path_txt("../in/test.txt");
     vector<vector<Pixel>> image1 = readTXT(path_txt);
 
@@ -199,6 +211,151 @@ int main(){
     path_txt        = "../out/out.txt";
     writePPMP3(path_ppm, image2);
     writeTXT(path_txt, image1);
+    */
 
+    vector <double> test({1.       ,  2.,  3.,  4., 5. ,
+       6., 7., 8. });
+    cout << "vector : ( " ;
+    for(auto const &x: test){
+        cout << x << " ";
+    }
+    cout << ")" << endl; 
+
+    vector < complex<double> > test_convert(to_complex(test));
+    cout << "vector : ( " ;
+    for(auto const &x: test_convert){
+        cout << x << " ";
+    }
+    cout << ")" << endl; 
+
+    fft1D(test_convert);
+
+    cout << "vector fft : ( " ;
+    for(size_t i = 0; i < test_convert.size(); ++i){
+        cout << test_convert[i] << " ";
+    }
+    cout << ")" << endl; 
+
+    ifft1D(test_convert);
+
+    cout << "vector ifft : ( " ;
+    for(size_t i = 0; i < test_convert.size(); ++i){
+        cout << test_convert[i] << " ";
+    }
+    cout << ")" << endl; 
+    
+    vector < complex<double> > test_convert2(to_complex(test));
+    dft(test_convert2);
+
+    cout << "vector dft : ( " ;
+    for(auto const &x: test_convert2){
+        cout << x << " ";
+    }
+    cout << ")" << endl; 
+
+    idft(test_convert2);
+
+    cout << "vector idft : ( " ;
+    for(auto const &x: test_convert2){
+        cout << x << " ";
+    }
+    cout << ")" << endl; 
+    
     return 0;
+
+}
+
+/* -------------  FFT : exact for power of 2 only  ---------------*/
+
+
+void fft1D(vector< complex<double> > & input){
+    const size_t len(input.size());
+
+    // Check if it is splitted enough
+	if (len <= 1) {
+		return;
+	}
+
+	// Split even and odd
+    vector< complex<double> > odd;
+    vector< complex<double> > even;
+
+    for(size_t i = 0; i < len/2; ++i){
+        even.push_back(input[i*2]);
+        odd.push_back(input[i*2+1]);
+    }
+
+    // Recursively call the Fourier Transform until the len is 1 
+    fft1D(even);
+    fft1D(odd);
+
+    // Calculate DFT
+	for (size_t k = 0; k < len / 2; k++) {
+        complex<double> t = polar(1., -2. * M_PI * k / len) * odd[k];
+		input[k] = even[k] + t;
+		input[len / 2 + k] = even[k] - t;
+	}
+}
+
+// inverse fft (in-place)
+void ifft1D(vector<complex<double>>& input)
+{
+    // conjugate the complex numbers
+    for(auto &x : input){
+        x = conj(x);
+    }
+
+    // forward fft
+    fft1D( input );
+ 
+    // conjugate the complex numbers and scale it
+    for(auto &x : input){
+        x = conj(x);
+        x /= input.size();
+    }
+}
+
+vector<complex<double>> to_complex(const vector<double>& input){
+    vector<complex<double>> out; 
+    for(auto const &x: input){
+        out.push_back(complex<double>(x, 0.));
+    }
+    return out;
+}
+
+
+/*DFT : Exact fourier transform*/
+void dft(vector<complex<double>>& input)
+{
+	complex<double> temp;
+    const complex<double> i(0.,1.);
+    const complex<double> null(0., 0.);
+    const double size = static_cast<double>(input.size());
+
+	for(size_t k=0; k<input.size(); k++)
+	{   
+        temp = null;
+		for(size_t n=0; n<input.size(); n++)
+		{
+			temp += input[n]*exp(-i*2.*M_PI*(double)k*(double)n/size);
+		}
+		input[k] = temp/= input.size();
+	}
+}
+
+/*IDFT : Exact inverse fourier transform*/
+void idft(vector<complex<double>>& input)
+{
+    
+    for(auto &x : input){
+        x = conj(x);
+    }
+
+    dft(input);
+
+    for(auto &x : input){
+        x = conj(x);
+        //x /= input.size();
+    }
+
 }
