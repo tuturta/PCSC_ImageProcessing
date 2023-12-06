@@ -69,5 +69,19 @@ _PRIVATE_:
   - [x] TXTReader
   - [ ] Tests
   - [ ] Documentation
+- [ ] Classe Compute
+  - [x] FFT
+  - [x] IFFT
+  - [x] DFT
+  - [x] IDFT
+  - [ ] FFT(Image)
+  - [ ] Adapter à la classe Image/Pixel
+  - [ ] Transpose
+  - [ ] Gtest
+  - [ ] Documentation
+- [ ] Histogram / Gplot
 
-- [ ] Choisir si on fait des pixels sur 8bits ou unsigned int
+- [x] Choisir si on fait des pixels sur 8bits ou unsigned int
+
+
+
