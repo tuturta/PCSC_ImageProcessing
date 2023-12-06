@@ -1,10 +1,11 @@
 #include<iostream>
-#include "src/Pixel.hh"
+#include "../src/Pixel.hh"
 
 using namespace std;
 
 int main(){
     Pixel pix({1,2,3,4});
     cout << "dimension " << pix.dim() << endl;
+    cout << "Pixel is " << pix << endl;
     return 0;
 }
