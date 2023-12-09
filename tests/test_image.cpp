@@ -1,8 +1,43 @@
 #include<iostream>
 #include "../src/Image.hh"
+#include "../src/MyExceptions.hh"
+#include <gtest/gtest.h>
 
 using namespace std;
 
+TEST(test_image,constructors_and_fcts){
+
+    vector<unsigned int> p00_val({0,1,2});
+    vector<unsigned int> p01_val({1,2,3});
+    vector<unsigned int> p10_val({2,3,4});
+    vector<unsigned int> p11_val({4,5,6});
+
+    Pixel p00(p00_val);
+    Pixel p01(p01_val);
+    Pixel p10(p10_val);
+    Pixel p11(p11_val);
+
+    vector<vector<Pixel>> vec_pix_0({{p00,p01},{p10,p00}});
+    
+    Image img0(vec_pix_0);
+
+    //Test constructor
+    EXPECT_EQ(img0.get_pixel(0,0).get_pixel_data(),p00_val) << "Image img0 pixel (0,0) is not (0,1,2) as expected : pb in the Image constructor";
+    // Test shape method
+    array<size_t,2> shape_expected({2,2});
+    EXPECT_EQ(img0.shape(),shape_expected) << "Method shape does not output the expected shape";
+    //test copy constructor
+    Image img0_copy(img0);
+    for(int i(0);i<img0.shape()[0];++i){
+        for(int j(0);j<img0.shape()[1];++j){
+            EXPECT_EQ(img0.get_pixel(i,j).get_pixel_data(),img0_copy.get_pixel(i,j).get_pixel_data()) << "Copy of img0 differs from img0 on pixel (" << i << "," << j << ")";
+        }
+    }
+    // Test row/columns management (set/get)
+    // TODO 
+}
+
+/*
 int main(){
     // declare 4 pixels 
     Pixel p1({0,0,0});
@@ -74,3 +109,4 @@ int main(){
 
     return 0;
 }
+*/
