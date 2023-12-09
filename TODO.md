@@ -82,6 +82,11 @@ _PRIVATE_:
 - [ ] Histogram / Gplot
 
 - [x] Choisir si on fait des pixels sur 8bits ou unsigned int
-
+- [ ] Gestion des exceptions
+  - [x] Classe Pixel
+  - [ ] Classe Image (en cours)
+  - [ ] Classe Compute
+  - [ ] Classe Output
+  - [ ] Classe AbstractReader
 
 

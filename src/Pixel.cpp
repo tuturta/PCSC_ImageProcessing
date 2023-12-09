@@ -1,29 +1,34 @@
 #include "Pixel.hh"
+#include "MyExceptions.hh"
 
 
 // Definitions of the methods:
 
-size_t Pixel::dim(){
+size_t Pixel::dim() const{
     // Returns the dimension of the pixel
     return values.size();
 }
 
 void Pixel::set_channel_value(size_t channel_id, unsigned int value){ 
     // Set the channel 'channel_id' to the value 'value'
-    values[channel_id]=value;
-}
-
-/* TODO : adapt for any number of channels 
-void Pixel::set_pixel_data(unsigned int new_data[3]){ 
-    // Set all 3 channels to the new values contained in the array new_data
-    for(size_t i(0);i<3;++i){
-        set_channel_value(i,new_data[i]);
+    if (channel_id > dim()){
+        throw InvalidDimException();
+    } else {
+        values[channel_id]=value;
     }
 }
-*/
+
 unsigned int Pixel::get_channel_value(size_t channel_id) const{
     // Returns the value stored in channel number 'channel_id'
-    return values[channel_id];
+    if (channel_id > dim()){
+        throw InvalidDimException();
+    } else {
+        return values[channel_id];
+    }
+}
+
+vector<unsigned int> Pixel::get_pixel_data() const{
+    return values;
 }
 
 // Assignment operator 
@@ -34,7 +39,7 @@ Pixel& Pixel::operator=(const Pixel& P){
 
 // << operator
 ostream & operator<<(ostream &out,Pixel const& P){
-    for(size_t i(0);i<P.values.size();++i){
+    for(size_t i(0);i<P.dim();++i){
         out << P.get_channel_value(i) << ' ';
     }
     return out;

@@ -17,10 +17,11 @@ class Pixel{
         Pixel& operator=(const Pixel& P);
         friend ostream & operator << (ostream &out, const Pixel &c);    // Methods 
     public : 
-        size_t dim();
-        //void set_pixel_data(unsigned int new_data[3]);
+        size_t dim() const;
         unsigned int get_channel_value(size_t channel_id) const;
         void set_channel_value(size_t channel_id, unsigned int value);
+        vector<unsigned int> get_pixel_data() const;
+
     // Attributes 
     private :
         vector<unsigned int> values;
