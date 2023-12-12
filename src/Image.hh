@@ -1,3 +1,4 @@
+#pragma once
 #include "Pixel.hh"
 #include<vector>
 #include<array>
