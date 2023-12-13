@@ -56,8 +56,10 @@ _PRIVATE_:
 # 2. Coder les classes
 
 - [x] Classe Pixel
-- [ ] Classe Image
-  - [ ] Tests
+  - [x] Tests
+  - [ ] Documentation
+- [x] Classe Image
+  - [x] Tests
   - [ ] Documentation
 - [ ] Classe Output
   - [x] TEXTOutput
@@ -84,7 +86,7 @@ _PRIVATE_:
 - [x] Choisir si on fait des pixels sur 8bits ou unsigned int
 - [ ] Gestion des exceptions
   - [x] Classe Pixel
-  - [ ] Classe Image (en cours)
+  - [x] Classe Image
   - [ ] Classe Compute
   - [ ] Classe Output
   - [ ] Classe AbstractReader

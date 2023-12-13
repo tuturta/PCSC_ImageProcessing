@@ -1,5 +1,5 @@
 #include<exception>
 
-struct NegativeException : public std::exception {};
+class NegativeException : public std::exception {};
 
-struct InvalidDimException : public std::exception {};
+class InvalidDimException : public std::exception {};
