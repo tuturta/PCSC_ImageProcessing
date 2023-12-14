@@ -4,18 +4,17 @@
 #include<array>
 #include "MyExceptions.hh"
 
-using namespace std;
-
 // Class image
 class Image{
     // Constructors
     public: 
-        Image(vector<vector<Pixel>> const& data):data(data){
+        Image(std::vector<std::vector<Pixel>> const& data,unsigned int max=255):data(data), max(max){
+            /// Check the number of channels
             size_t dim_ref(data[0][0].dim());
             for(size_t i(0);i<data.size();++i){
                 for(size_t j(0); j<data[0].size();++j){
                     if(data[i][j].dim()!=dim_ref){
-                        throw InvalidDimException();
+                        throw InvalidDimException("Pixel dimensions are not consistent with each other, I can't build an image from this pixel collection");
                     }
                 }
             }
@@ -23,23 +22,25 @@ class Image{
         }
         Image(Image const& img):data(img.data){} // copy constructor
     // operators :
-        friend ostream & operator << (ostream &out, const Image &img); 
+        friend std::ostream & operator << (std::ostream &out, const Image &img); 
 
     // Attributes
     private:
-        vector<vector<Pixel>> data;
+        std::vector<std::vector<Pixel>> data;
         size_t bands_number;
+        unsigned int max;
     // Methods 
     public : 
-        array<size_t,2> shape() const;
+        std::array<size_t,2> shape() const;
         size_t Nbands() const;
+        unsigned int get_max() const;
         // access pixel
         void set_pixel(Pixel const& P,unsigned int i, unsigned int j);
         Pixel get_pixel(unsigned int i, unsigned int j) const;  
         // access rows/columns
-        void set_row(vector<Pixel> const& pix_row,unsigned int i);
-        vector<Pixel> get_row(unsigned int i) const;
-        void set_column(vector<Pixel> const& pix_col,unsigned int j);
-        vector<Pixel> get_column(unsigned int j) const;
-        vector<unsigned int> get_band_1D(unsigned int b) const;
+        void set_row(std::vector<Pixel> const& pix_row,unsigned int i);
+        std::vector<Pixel> get_row(unsigned int i) const;
+        void set_column(std::vector<Pixel> const& pix_col,unsigned int j);
+        std::vector<Pixel> get_column(unsigned int j) const;
+        std::vector<unsigned int> get_band_1D(unsigned int b) const;
 };  
