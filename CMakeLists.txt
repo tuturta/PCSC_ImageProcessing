@@ -24,6 +24,10 @@ add_library(Writer
   src/writer.cpp
 )
 
+add_library(Compute
+  src/compute.cpp
+)
+
 add_subdirectory(googletest)
 
 # For gnuplot :
@@ -39,6 +43,14 @@ target_link_libraries(example_histogram PUBLIC Image Pixel Reader PRIVATE
                       Boost::system
                       Boost::filesystem
 )
+
+# For TESTS 
+
+######
+add_executable(example_compute tests/test_compute.cpp)
+# adds linked libraries to produce executable
+target_link_libraries(example_compute PUBLIC Reader Image Pixel Compute)
+######
 
 add_executable(test_image tests/test_image.cpp)
 target_link_libraries(test_image Image Pixel gtest_main gtest pthread)

@@ -19,6 +19,10 @@ unsigned int Image::get_max() const{
     return max;
 }
 
+vector<vector<Pixel>> Image::get_data() const{
+    return data;
+}
+
 void Image::set_pixel(Pixel const& P, unsigned int i, unsigned int j){
     array<size_t,2> dims(shape());
     if(i>dims[0] | j>dims[1]){

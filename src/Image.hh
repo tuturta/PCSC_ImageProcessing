@@ -20,7 +20,7 @@ class Image{
             }
             bands_number = dim_ref;
         }
-        Image(Image const& img):data(img.data){} // copy constructor
+        Image(Image const& img):data(img.get_data()),max(img.get_max()){} // copy constructor
     // operators :
         friend std::ostream & operator << (std::ostream &out, const Image &img); 
 
@@ -34,6 +34,7 @@ class Image{
         std::array<size_t,2> shape() const;
         size_t Nbands() const;
         unsigned int get_max() const;
+        std::vector<std::vector<Pixel>> get_data() const;
         // access pixel
         void set_pixel(Pixel const& P,unsigned int i, unsigned int j);
         Pixel get_pixel(unsigned int i, unsigned int j) const;  
