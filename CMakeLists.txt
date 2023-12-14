@@ -29,6 +29,7 @@ add_library(Compute
 )
 
 add_subdirectory(googletest)
+include_directories(${CMAKE_SOURCE_DIR}/eigen)
 
 # For gnuplot :
 # find dependencies (Boost)
@@ -45,15 +46,11 @@ target_link_libraries(example_histogram PUBLIC Image Pixel Reader PRIVATE
 )
 
 # For TESTS 
-
-######
 add_executable(example_compute tests/test_compute.cpp)
-# adds linked libraries to produce executable
 target_link_libraries(example_compute PUBLIC Reader Image Pixel Compute)
-######
 
 add_executable(test_image tests/test_image.cpp)
-target_link_libraries(test_image Image Pixel gtest_main gtest pthread)
+target_link_libraries(test_image Image Pixel gtest_main gtest pthread) 
 
 add_executable(test_pixel tests/test_pixels.cpp)
 target_link_libraries(test_pixel Pixel gtest_main gtest pthread)

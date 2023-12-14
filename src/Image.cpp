@@ -5,6 +5,26 @@
 
 using namespace std;
 
+// Constructeurs 
+
+Image::Image(std::vector<std::vector<Pixel>> const& data,unsigned int max):data(data), max(max){
+            /// Check the number of channels
+            size_t dim_ref(data[0][0].dim());
+            for(size_t i(0);i<data.size();++i){
+                for(size_t j(0); j<data[0].size();++j){
+                    if(data[i][j].dim()!=dim_ref){
+                        throw InvalidDimException("Pixel dimensions are not consistent with each other, I can't build an image from this pixel collection");
+                    }
+                }
+            }
+            bands_number = dim_ref;
+        }
+
+Image::Image(Image const& img):data(img.get_data()),max(img.get_max()){}
+
+Image::Image(vector<MatrixXcd> const& bands_matrices,unsigned int max) : data(bands_matrix_to_2D_pixel_vector(bands_matrices)),max(max){}
+
+
 // Definitions of the methods
 array<size_t,2> Image::shape() const{
     array<size_t,2> shape({data.size(),data[0].size()});
@@ -116,6 +136,22 @@ vector<unsigned int> Image::get_band_1D(unsigned int b) const{
     }
 }
 
+std::vector<MatrixXcd> Image::bands_as_complex_matrices() const{
+    array<size_t,2> img_dims(shape());
+    MatrixXcd matrix(img_dims[0],img_dims[1]);
+    std::vector<MatrixXcd> bands_matrices(bands_number,matrix);
+    
+    for (size_t i(0);i<img_dims[0];++i){
+        for(size_t j(0);j<img_dims[1];++j){
+            for(size_t b(0); b<bands_number; ++b){
+                bands_matrices[b](i,j)=data[i][j].get_channel_value(b);
+            }
+        }
+    }
+    return bands_matrices;
+}
+
+
 // << operator
 ostream & operator<<(ostream &out,Image const& img){
     array<size_t,2> dims(img.shape());
@@ -127,4 +163,38 @@ ostream & operator<<(ostream &out,Image const& img){
         out << endl;
     }
     return out;
+}
+
+
+
+// Function related to Image manipulation
+std::vector<std::vector<Pixel>> bands_matrix_to_2D_pixel_vector(std::vector<MatrixXcd> const& bands_matrices){
+    // CHECK DIMENSIONS (TODO)
+
+    // Get dimensions of the problem 
+    unsigned int num_bands(bands_matrices.size());
+    size_t m(bands_matrices[0].rows());
+    size_t n(bands_matrices[0].cols());
+
+    // Allocate space for future img_data to fill
+    vector<unsigned int> null_pix_data(num_bands,0);
+    Pixel null_pix(null_pix_data);
+    std::vector<Pixel> null_row(m,null_pix);
+    std::vector<std::vector<Pixel>> img_data(n,null_row);
+
+    // Fill the img_data, rounding values to get unsigned int, else set 0 (OR throwing error if negative values encoutered?)
+    for(size_t i(0);i<m;++i){
+        for(size_t j(0);j<n;++j){
+            for(size_t b(0);b<num_bands;++b){
+                double value(bands_matrices[b](i,j).real());
+                if(value>=0){
+                    img_data[i][j].set_channel_value(b,round(value));
+                } else {
+                    img_data[i][j].set_channel_value(b,0); 
+                    //throw NegativeException("Tried to set a negative value as channel value");
+                }
+            }
+        }
+    }
+    return img_data;
 }
