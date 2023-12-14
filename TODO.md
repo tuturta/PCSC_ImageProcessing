@@ -65,6 +65,7 @@ _PRIVATE_:
 - [ ] Classe Output
   - [x] TEXTOutput
   - [x] PPMOutput
+  - [ ] Ajouter Data en attribut de classe
   - [ ] Tests
   - [ ] Documentation
 - [ ] Classe AbstractReader
