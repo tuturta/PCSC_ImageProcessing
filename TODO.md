@@ -61,6 +61,7 @@ _PRIVATE_:
 - [x] Classe Image
   - [x] Tests
   - [ ] Documentation
+  - [ ] Add attribute Max
 - [ ] Classe Output
   - [x] TEXTOutput
   - [x] PPMOutput
@@ -81,7 +82,9 @@ _PRIVATE_:
   - [ ] Transpose
   - [ ] Gtest
   - [ ] Documentation
-- [ ] Histogram / Gplot
+- [x] Histogram / Gplot
+- [ ] Contour extraction 
+- [ ] Filtering with Fourier Transform
 
 - [x] Choisir si on fait des pixels sur 8bits ou unsigned int
 - [ ] Gestion des exceptions

@@ -10,6 +10,10 @@ array<size_t,2> Image::shape() const{
     return shape;
 }
 
+size_t Image::Nbands() const{
+    return bands_number;
+}
+
 void Image::set_pixel(Pixel const& P, unsigned int i, unsigned int j){
     array<size_t,2> dims(shape());
     if(i>dims[0] | j>dims[1]){
@@ -75,6 +79,23 @@ vector<Pixel> Image::get_column(unsigned int j) const{
     }
 }
 
+/**
+ * @brief This method returns a band of the image as a list. The only argument is the band index.
+ * 
+ * @param b 
+ * @return vector<unsigned int> 
+ */
+vector<unsigned int> Image::get_band_1D(unsigned int b) const{
+    // TODO : exception management if b is invalid !
+    array<size_t,2> dims(shape());
+    vector<unsigned int> band_1D(dims[0]*dims[1],0);
+    for(size_t i(0);i<dims[0];++i){
+        for(size_t j(0);j<dims[1];++j){
+            band_1D[i*dims[1]+j]= get_pixel(i,j).get_channel_value(b);
+        }
+    }
+    return band_1D;
+}
 
 // << operator
 ostream & operator<<(ostream &out,Image const& img){
