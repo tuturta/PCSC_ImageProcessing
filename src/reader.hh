@@ -1,3 +1,4 @@
+#pragma once
 #include "Image.hh"
 #include <vector>
 #include <string>

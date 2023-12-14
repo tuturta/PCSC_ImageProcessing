@@ -97,5 +97,5 @@ Image PPMReader::read(){
     // Close the file
     ppmFile.close();
 
-    return image;
+    return Image(image,maxColor);
 }
