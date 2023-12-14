@@ -32,12 +32,39 @@ add_library(Transform
 # Add the path to Eigen headers
 include_directories(${CMAKE_SOURCE_DIR}/eigen)
 
+add_library(Compute
+  src/compute.cpp
+)
 
-# add_executable(test_image tests/test_image.cpp)
-# target_link_libraries(test_image Image Pixel gtest_main gtest pthread)
+add_subdirectory(googletest)
 
-# add_executable(test_pixel tests/test_pixels.cpp)
-# target_link_libraries(test_pixel Pixel gtest_main gtest pthread)
+# For gnuplot :
+# find dependencies (Boost)
+find_package(Boost REQUIRED COMPONENTS 
+            iostreams system filesystem)
+# adds the search path for includes
+include_directories(gnuplot-iostream)
+add_executable(example_histogram tests/test_histogram.cpp)
+# adds linked libraries to produce executable
+target_link_libraries(example_histogram PUBLIC Image Pixel Reader PRIVATE
+                      Boost::iostreams
+                      Boost::system
+                      Boost::filesystem
+)
+
+# For TESTS 
+
+######
+add_executable(example_compute tests/test_compute.cpp)
+# adds linked libraries to produce executable
+target_link_libraries(example_compute PUBLIC Reader Image Pixel Compute)
+######
+
+add_executable(test_image tests/test_image.cpp)
+target_link_libraries(test_image Image Pixel gtest_main gtest pthread)
+
+add_executable(test_pixel tests/test_pixels.cpp)
+target_link_libraries(test_pixel Pixel gtest_main gtest pthread)
 
 # add_executable(test_writer tests/test_writer.cpp)
 # target_link_libraries(test_writer Pixel Image Reader Writer)

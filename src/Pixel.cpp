@@ -1,7 +1,6 @@
 #include "Pixel.hh"
 #include "MyExceptions.hh"
 
-
 // Definitions of the methods:
 
 size_t Pixel::dim() const{
@@ -12,7 +11,8 @@ size_t Pixel::dim() const{
 void Pixel::set_channel_value(size_t channel_id, unsigned int value){ 
     // Set the channel 'channel_id' to the value 'value'
     if (channel_id > dim()){
-        throw InvalidDimException();
+        std::string error_message="Cannot set channel "+std::__cxx11::to_string(channel_id)+" since pixel has "+std::__cxx11::to_string(dim())+" channels";
+        throw InvalidDimException(error_message);
     } else {
         values[channel_id]=value;
     }
@@ -21,13 +21,14 @@ void Pixel::set_channel_value(size_t channel_id, unsigned int value){
 unsigned int Pixel::get_channel_value(size_t channel_id) const{
     // Returns the value stored in channel number 'channel_id'
     if (channel_id > dim()){
-        throw InvalidDimException();
+        std::string error_message="Cannot get channel "+std::__cxx11::to_string(channel_id)+" since pixel has "+std::__cxx11::to_string(dim())+" channels";
+        throw InvalidDimException(error_message);
     } else {
         return values[channel_id];
     }
 }
 
-vector<unsigned int> Pixel::get_pixel_data() const{
+std::vector<unsigned int> Pixel::get_pixel_data() const{
     return values;
 }
 
@@ -38,7 +39,7 @@ Pixel& Pixel::operator=(const Pixel& P){
 };
 
 // << operator
-ostream & operator<<(ostream &out,Pixel const& P){
+std::ostream & operator<<(std::ostream &out,Pixel const& P){
     for(size_t i(0);i<P.dim();++i){
         out << P.get_channel_value(i) << ' ';
     }

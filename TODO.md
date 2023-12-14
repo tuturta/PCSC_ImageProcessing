@@ -56,9 +56,12 @@ _PRIVATE_:
 # 2. Coder les classes
 
 - [x] Classe Pixel
-- [ ] Classe Image
-  - [ ] Tests
+  - [x] Tests
   - [ ] Documentation
+- [x] Classe Image
+  - [x] Tests
+  - [ ] Documentation
+  - [ ] Add attribute Max
 - [ ] Classe Output
   - [x] TEXTOutput
   - [x] PPMOutput
@@ -80,12 +83,14 @@ _PRIVATE_:
   - [ ] Transpose
   - [ ] Gtest
   - [ ] Documentation
-- [ ] Histogram / Gplot
+- [x] Histogram / Gplot
+- [ ] Contour extraction 
+- [ ] Filtering with Fourier Transform
 
 - [x] Choisir si on fait des pixels sur 8bits ou unsigned int
 - [ ] Gestion des exceptions
   - [x] Classe Pixel
-  - [ ] Classe Image (en cours)
+  - [x] Classe Image
   - [ ] Classe Compute
   - [ ] Classe Output
   - [ ] Classe AbstractReader
