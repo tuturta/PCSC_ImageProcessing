@@ -24,8 +24,7 @@ void draw_histogram(Image const& image,string fp,unsigned int Nbins=50){
     
     Gnuplot gp;
     gp << "reset\n";
-    gp << "n=260\n";
-    gp << "max=260\n";
+    gp << "max="<< to_string(image.get_max()+5) << "\n";
     gp << "min=0\n";
     gp << "width=(max-min)/"<< Nbins <<"\n"; 
     /// function used to map a value to the intervals
