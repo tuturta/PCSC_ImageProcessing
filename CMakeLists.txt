@@ -52,7 +52,6 @@ add_library(Compute
 #                       Boost::system
 #                       Boost::filesystem)
 
-# TESTS EXECUTABLES
 add_executable(example_compute tests/test_compute.cpp)
 target_link_libraries(example_compute PUBLIC Reader Image Pixel Compute gtest_main gtest pthread)
 
@@ -66,7 +65,22 @@ add_executable(test_IO tests/test_IO.cpp)
 target_link_libraries(test_IO Pixel Image Reader Writer gtest_main gtest pthread)
 
 add_executable(test_transform tests/test_transform.cpp)
-target_link_libraries(test_transform Pixel Image Reader Writer Transform gtest_main gtest pthread)
+target_link_libraries(test_transform Image Pixel Reader Writer Transform gtest_main gtest pthread)
 
+
+# PROGRAM EXECUTABLE
+add_executable(image_processor src/image_processor.cpp)
+target_link_libraries(image_processor PUBLIC 
+                                        Transform 
+                                        Compute 
+                                        Reader 
+                                        Image 
+                                        Pixel 
+                                        PlotHist 
+                                        Writer 
+                                      PRIVATE
+                                        Boost::iostreams
+                                        Boost::system
+                                        Boost::filesystem)
 
 #add_custom_target(test ./test_image DEPENDS test_pixel)

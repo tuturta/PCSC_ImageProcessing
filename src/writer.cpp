@@ -3,7 +3,7 @@
 #include <fstream>
 #include <string>
 
-
+using namespace std;
 AbstractWriter::AbstractWriter(string_view path, const Image& image):path_(path), image_(image){}
 TXTWriter::TXTWriter(string_view path, const Image& image):AbstractWriter(path, image){if(path_.substr(path_.length() -4) != ".txt") throw WrongFileFormatException("Path should end by .txt");}
 PPMWriter::PPMWriter(string_view path, const Image& image):AbstractWriter(path, image){
