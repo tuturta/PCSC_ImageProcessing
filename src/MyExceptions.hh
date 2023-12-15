@@ -37,3 +37,13 @@ class PixelDimException : public std::domain_error {
 public:
     explicit PixelDimException(std::string const& msg) : std::domain_error(msg) {}
 };
+
+class RectangleImageException : public std::domain_error {
+public:
+    explicit RectangleImageException(std::string const& msg) : std::domain_error(msg) {}
+};
+
+class MinImageSizeException : public std::invalid_argument {
+public:
+    explicit MinImageSizeException(std::string const& msg) : std::invalid_argument(msg) {}
+};
