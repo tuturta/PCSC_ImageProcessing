@@ -73,11 +73,7 @@ add_executable(test_IO tests/test_IO.cpp)
 target_link_libraries(test_IO Pixel Image Reader Writer gtest_main gtest pthread)
 
 add_executable(test_transform tests/test_transform.cpp)
-target_link_libraries(test_transform Pixel Image Reader Writer Transform gtest_main gtest pthread)
-
-
-#add_custom_target(test ./test_image DEPENDS test_pixel)
-target_link_libraries(test_FT Transform)
+target_link_libraries(test_transform Image Pixel Reader Writer Transform gtest_main gtest pthread)
 
 
 # PROGRAM EXECUTABLE
