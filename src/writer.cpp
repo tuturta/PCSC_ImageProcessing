@@ -4,13 +4,13 @@
 #include <string>
 
 
-AbstractWriter::AbstractWriter(string_view path):path_(path){}
-TXTWriter::TXTWriter(string_view path):AbstractWriter(path){}
-PPMWriter::PPMWriter(string_view path):AbstractWriter(path){}
+AbstractWriter::AbstractWriter(string_view path, const Image& image):path_(path), image_(image){}
+TXTWriter::TXTWriter(string_view path, const Image& image):AbstractWriter(path, image){}
+PPMWriter::PPMWriter(string_view path, const Image& image):AbstractWriter(path, image){}
 
 
 // Function to write a PPM P3 file from a 2D vector of pixels
-void PPMWriter::write(const Image& image) {
+void PPMWriter::write() {
     // Open the PPM file for writing
     ofstream ppmFile(path_, std::ofstream::out | std::ofstream::trunc);
 
@@ -19,7 +19,7 @@ void PPMWriter::write(const Image& image) {
     }
 
     // Shape of the image 
-    auto shape(image.shape());
+    auto shape(image_.shape());
     vector<Pixel> row;
 
     // Write PPM header
@@ -29,7 +29,7 @@ void PPMWriter::write(const Image& image) {
 
     // Write pixel values
     for (size_t i = 0; i<shape[0]; ++i) {
-        row = image.get_row(i);
+        row = image_.get_row(i);
         for (const auto& pixel : row) {
             ppmFile << unsigned(pixel.get_channel_value(0)) << " " << unsigned(pixel.get_channel_value(1)) << " " << unsigned(pixel.get_channel_value(2)) << " ";
         }
@@ -41,7 +41,7 @@ void PPMWriter::write(const Image& image) {
 }
 
 // Function to write a PPM P3 file from a 2D vector of pixels
-void TXTWriter::write(const Image& image) {
+void TXTWriter::write() {
     
     // Open the PPM file for writing
     ofstream txtFile(path_, std::ofstream::out | std::ofstream::trunc);
@@ -50,17 +50,17 @@ void TXTWriter::write(const Image& image) {
     }
    
    // Shape of the image 
-    auto shape(image.shape());
+    auto shape(image_.shape());
     
     // Initialize a new vector row
     vector<Pixel> row;
     
     // Write txt header
-    txtFile << shape[1] << " " << shape[0] << " " << image.get_pixel(0,0).dim() << "\n";
+    txtFile << shape[1] << " " << shape[0] << " " << image_.get_pixel(0,0).dim() << "\n";
 
     // Write pixel values
     for (size_t i=0; i<shape[0]; ++i) {
-        row = image.get_row(i);
+        row = image_.get_row(i);
         for (const auto& pixel : row) {
             txtFile << unsigned(pixel.get_channel_value(0)) << " " << unsigned(pixel.get_channel_value(1)) << " " << unsigned(pixel.get_channel_value(2)) << "   ";
         }
