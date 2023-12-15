@@ -12,20 +12,20 @@ project (PCSC-project)
 set(CMAKE_CXX_STANDARD 20)
 
 
-set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR})
+set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
-# add_library(Image
-#   src/Image.cpp
-# )
-# add_library(Pixel
-#   src/Pixel.cpp
-# )
-# add_library(Reader
-#   src/reader.cpp
-# )
-# add_library(Writer
-#   src/writer.cpp
-# )
+add_library(Image
+  src/Image.cpp
+)
+add_library(Pixel
+  src/Pixel.cpp
+)
+add_library(Reader
+  src/reader.cpp
+)
+add_library(Writer
+  src/writer.cpp
+)
 add_library(Transform
   src/transform.cpp
 )
@@ -55,7 +55,7 @@ target_link_libraries(example_histogram PUBLIC Image Pixel Reader PRIVATE
 
 # For TESTS 
 add_executable(example_compute tests/test_compute.cpp)
-target_link_libraries(example_compute PUBLIC Reader Image Pixel Compute)
+target_link_libraries(example_compute PUBLIC Reader Image Pixel Compute gtest_main gtest pthread)
 
 add_executable(test_image tests/test_image.cpp)
 target_link_libraries(test_image Image Pixel gtest_main gtest pthread) 
