@@ -7,8 +7,8 @@ using namespace std;
 
 
 AbstractReader::AbstractReader(string_view path): path_(path) {};
-TXTReader::TXTReader(string_view path): AbstractReader(path) {};
-PPMReader::PPMReader(string_view path): AbstractReader(path) {};
+TXTReader::TXTReader(string_view path): AbstractReader(path) {if(path_.substr(path_.length() -4) != ".txt") throw WrongFileFormatException("Path should end by .txt");};
+PPMReader::PPMReader(string_view path): AbstractReader(path) {if(path_.substr(path_.length() -4) != ".ppm") throw WrongFileFormatException("Path should end by .ppm");};
 
 Image TXTReader::read(){
     int input;
@@ -25,18 +25,19 @@ Image TXTReader::read(){
 
     // Extract the shape of the data
     file >> nb_cols >> nb_rows >> nb_channels;
+    if(nb_cols < 0 | nb_rows < 0 | nb_channels < 0) throw NegativeDimException("Dimensions read from the txt file contain negative values !");
     file >> ws;
     for(size_t row = 0; row < nb_rows; ++row){
         for(size_t col = 0; col < nb_cols; ++col){
             for(size_t i = 0; i < nb_channels; ++i){
                 if(file.eof()){
-                    throw invalid_argument("Specified data size and actual data size do not match !");
+                    throw InvalidDimException("Specified data size and actual data size do not match !");
                 }
                 file >> input;
                 //cout << row << col << i << endl;
                 if(input < 0){
                     string error_message("Negative input in the text file at position (" + to_string(row) + ", " + to_string(col) + ", " + to_string(i) + ")");
-                    throw invalid_argument(error_message);
+                    throw NegativePixelValueException(error_message);
                 }
                 channels.push_back((unsigned int) input);
             }
@@ -70,11 +71,13 @@ Image PPMReader::read(){
     ppmFile >> magicNumber;
 
     if (magicNumber != "P3") {
-        throw invalid_argument("Unsupported PPM format. This example supports only P3 format.");
+        throw WrongPpmFormatException("Unsupported PPM format. This example supports only P3 format.");
     }
 
     int nb_cols, nb_rows, maxColor;
     ppmFile >> nb_cols >> nb_rows >> maxColor;
+    if(nb_cols < 0 | nb_rows < 0 | maxColor < 0) throw NegativeDimException("Dimensions read from the txt file contain negative values !");
+
 
     // Read pixel values
     for (int i = 0; i < nb_rows; ++i) {
@@ -82,12 +85,12 @@ Image PPMReader::read(){
             ppmFile >> red >> green >> blue;
             if((red < 0) or (green < 0) or (blue < 0)){
                         string error_message("Negative input in the text file at position (" + to_string(i) + ", " + to_string(j) + ")");
-                        throw invalid_argument(error_message);
+                        throw NegativePixelValueException(error_message);
                     }
             cols.push_back(Pixel{(unsigned int) red, (unsigned int) green, (unsigned int) blue});
 
             if(ppmFile.eof()){
-                        throw invalid_argument("Specified data size and actual data size do not match !");
+                        throw InvalidDimException("Specified data size and actual data size do not match !");
             }
         }
         image.push_back(cols);
