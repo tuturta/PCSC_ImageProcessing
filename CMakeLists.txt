@@ -45,7 +45,7 @@ find_package(Boost REQUIRED COMPONENTS
             iostreams system filesystem)
 # adds the search path for includes
 include_directories(gnuplot-iostream)
-add_executable(example_histogram tests/test_histogram.cpp)
+add_executable(example_histogram tests/example_histogram.cpp)
 # adds linked libraries to produce executable
 target_link_libraries(example_histogram PUBLIC Image Pixel Reader PRIVATE
                       Boost::iostreams
