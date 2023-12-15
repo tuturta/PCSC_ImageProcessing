@@ -64,11 +64,11 @@ add_subdirectory(googletest)
 # add_executable(test_pixel tests/test_pixels.cpp)
 # target_link_libraries(test_pixel Pixel gtest_main gtest pthread)
 
-# add_executable(test_writer tests/test_writer.cpp)
-# target_link_libraries(test_writer Pixel Image Reader Writer)
+add_executable(test_IO tests/test_IO.cpp)
+target_link_libraries(test_IO Pixel Image Reader Writer gtest_main gtest pthread)
 
-add_executable(test_FT tests/test_FT.cpp)
-target_link_libraries(test_FT Transform Image Pixel Reader Writer)
+add_executable(test_transform tests/test_transform.cpp)
+target_link_libraries(test_transform Pixel Image Reader Writer Transform gtest_main gtest pthread)
 
 
 #add_custom_target(test ./test_image DEPENDS test_pixel)
