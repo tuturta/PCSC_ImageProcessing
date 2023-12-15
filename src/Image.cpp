@@ -5,10 +5,8 @@
 
 using namespace std;
 
-// Constructeurs 
-
 Image::Image(std::vector<std::vector<Pixel>> const& data,unsigned int max):data(data), max(max){
-            /// Check the number of channels
+            // Check the number of channels
             size_t dim_ref(data[0][0].dim());
             for(size_t i(0);i<data.size();++i){
                 for(size_t j(0); j<data[0].size();++j){
@@ -24,8 +22,6 @@ Image::Image(Image const& img):data(img.get_data()),max(img.get_max()){}
 
 Image::Image(vector<MatrixXcd> const& bands_matrices,unsigned int max) : data(bands_matrix_to_2D_pixel_vector(bands_matrices)),max(max){}
 
-
-// Definitions of the methods
 array<size_t,2> Image::shape() const{
     array<size_t,2> shape({data.size(),data[0].size()});
     return shape;
@@ -114,12 +110,6 @@ vector<Pixel> Image::get_column(unsigned int j) const{
     }
 }
 
-/**
- * @brief This method returns a band of the image as a list. The only argument is the band index.
- * 
- * @param b 
- * @return vector<unsigned int> 
- */
 vector<unsigned int> Image::get_band_1D(unsigned int b) const{
     if(b>bands_number){
         string error_message="Cannot get band "+to_string(b)+" since image has "+to_string(bands_number)+" bands";
@@ -151,8 +141,6 @@ std::vector<MatrixXcd> Image::bands_as_complex_matrices() const{
     return bands_matrices;
 }
 
-
-// << operator
 ostream & operator<<(ostream &out,Image const& img){
     array<size_t,2> dims(img.shape());
     

@@ -2,7 +2,6 @@
 #include "MyExceptions.hh"
 
 using namespace std;
-// Definitions of the methods:
 
 size_t Pixel::dim() const{
     // Returns the dimension of the pixel

@@ -1,17 +1,10 @@
 #include "compute.hh"
 #include "Image.hh"
 
-// constructor of Compute
 Compute::Compute(Image const& img): data(img){};
 
-// Constructor of ComputeHistogram 
 ComputeHistogram::ComputeHistogram(Image const& img, unsigned int Nbins):Compute(img),Nbins(Nbins){};
 
-/**
- * @brief Computes the intensity histograms for each channel of an image.
- * 
- * @return std::vector<std::vector<double>> vector containing the histograms for each channel
- */
 std::vector<std::vector<double>> ComputeHistogram::compute() const{
     // Dimensions of the image
     size_t Nbands(data.Nbands());
