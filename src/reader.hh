@@ -46,18 +46,18 @@ public:
 };
 
 /**
- * @brief Implementation of a PPM file reader for images.
+ * @brief Implementation of a PPM P3 file reader for images.
  */
 class PPMReader : public AbstractReader {
 public:
     /**
      * @brief Constructor for PPMReader.
-     * @param path The path to the PPM file to be read.
+     * @param path The path to the PPM P3 file to be read.
      */
     explicit PPMReader(string_view path);
 
     /**
-     * @brief Read the Image data from a PPM file.
+     * @brief Read the Image data from a PPM P3 file.
      * @return The Image read from the file.
      */
     Image read() override;
