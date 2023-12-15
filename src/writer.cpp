@@ -5,8 +5,11 @@
 
 
 AbstractWriter::AbstractWriter(string_view path, const Image& image):path_(path), image_(image){}
-TXTWriter::TXTWriter(string_view path, const Image& image):AbstractWriter(path, image){}
-PPMWriter::PPMWriter(string_view path, const Image& image):AbstractWriter(path, image){}
+TXTWriter::TXTWriter(string_view path, const Image& image):AbstractWriter(path, image){if(path_.substr(path_.length() -4) != ".txt") throw WrongFileFormatException("Path should end by .txt");}
+PPMWriter::PPMWriter(string_view path, const Image& image):AbstractWriter(path, image){
+    if(path_.substr(path_.length() -4) != ".ppm") throw WrongFileFormatException("Path should end by .ppm");
+    if(image.get_pixel(0,0).dim() != 3) throw PixelDimException("PPM accept only RGB images.");
+    }
 
 
 // Function to write a PPM P3 file from a 2D vector of pixels
