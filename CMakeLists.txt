@@ -39,18 +39,18 @@ add_library(Compute
   src/compute.cpp
 )
 
-# GNUPLOT EXAMPLE
-  # find dependencies (Boost)
-find_package(Boost REQUIRED COMPONENTS 
-            iostreams system filesystem)
-  # adds the search path for includes
-include_directories(gnuplot-iostream)
-add_executable(example_histogram tests/example_histogram.cpp)
-  # adds linked libraries to produce executable
-target_link_libraries(example_histogram PUBLIC Image Pixel Reader PRIVATE
-                      Boost::iostreams
-                      Boost::system
-                      Boost::filesystem)
+# # GNUPLOT EXAMPLE
+#   # find dependencies (Boost)
+# find_package(Boost REQUIRED COMPONENTS 
+#             iostreams system filesystem)
+#   # adds the search path for includes
+# include_directories(gnuplot-iostream)
+# add_executable(example_histogram tests/example_histogram.cpp)
+#   # adds linked libraries to produce executable
+# target_link_libraries(example_histogram PUBLIC Image Pixel Reader PRIVATE
+#                       Boost::iostreams
+#                       Boost::system
+#                       Boost::filesystem)
 
 # TESTS EXECUTABLES
 add_executable(example_compute tests/test_compute.cpp)
@@ -70,4 +70,3 @@ target_link_libraries(test_transform Pixel Image Reader Writer Transform gtest_m
 
 
 #add_custom_target(test ./test_image DEPENDS test_pixel)
-target_link_libraries(test_FT Transform)
