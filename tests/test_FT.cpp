@@ -56,8 +56,6 @@ int main(){
 
     // Declaration of reader and writer classes
     PPMReader in_file(path_in);
-    PPMWriter out_blur(path_out_gauss);
-    PPMWriter out_contour(path_out_contour);
 
     cout << "Classes initialized" << endl;
 
@@ -76,8 +74,10 @@ int main(){
         filter_solber.apply();
 
     // Save the image to the output file
-        out_blur.write(image_blur);
-        out_contour.write(image_contour);
+        PPMWriter out_blur(path_out_gauss, image_blur);
+        PPMWriter out_contour(path_out_contour, image_contour);
+        out_blur.write();
+        out_contour.write();
 
         cout << "Image written" << endl;
     }
