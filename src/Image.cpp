@@ -6,7 +6,7 @@
 using namespace std;
 
 Image::Image(std::vector<std::vector<Pixel>> const& data,unsigned int max):data(data), max(max){
-            /// Check the number of channels
+            // Check the number of channels
             size_t dim_ref(data[0][0].dim());
             for(size_t i(0);i<data.size();++i){
                 for(size_t j(0); j<data[0].size();++j){

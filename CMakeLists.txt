@@ -15,6 +15,8 @@ set(CMAKE_CXX_STANDARD 20)
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 set (CMAKE_CURRENT_BINARY_DIR ${CMAKE_SOURCE_DIR}/build)
 
+add_subdirectory(googletest)
+include_directories(${CMAKE_SOURCE_DIR}/eigen)
 
 # LIBRARIES 
 add_library(Image
@@ -33,12 +35,9 @@ add_library(Transform
   src/transform.cpp
 )
 
-# add_library(Compute
-#   src/compute.cpp
-# )
-
-add_subdirectory(googletest)
-include_directories(${CMAKE_SOURCE_DIR}/eigen)
+add_library(Compute
+  src/compute.cpp
+)
 
 # GNUPLOT EXAMPLE
   # find dependencies (Boost)
@@ -57,11 +56,11 @@ target_link_libraries(example_histogram PUBLIC Image Pixel Reader PRIVATE
 add_executable(example_compute tests/test_compute.cpp)
 target_link_libraries(example_compute PUBLIC Reader Image Pixel Compute gtest_main gtest pthread)
 
-# add_executable(test_image tests/test_image.cpp)
-# target_link_libraries(test_image Image Pixel gtest_main gtest pthread)
+add_executable(test_image tests/test_image.cpp)
+target_link_libraries(test_image Image Pixel gtest_main gtest pthread)
 
-# add_executable(test_pixel tests/test_pixels.cpp)
-# target_link_libraries(test_pixel Pixel gtest_main gtest pthread)
+add_executable(test_pixel tests/test_pixels.cpp)
+target_link_libraries(test_pixel Pixel gtest_main gtest pthread)
 
 # add_executable(test_writer tests/test_writer.cpp)
 # target_link_libraries(test_writer Pixel Image Reader Writer)
