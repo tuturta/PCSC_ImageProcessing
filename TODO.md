@@ -57,42 +57,46 @@ _PRIVATE_:
 
 - [x] Classe Pixel
   - [x] Tests
-  - [ ] Documentation
+  - [x] Documentation
 - [x] Classe Image
   - [x] Tests
-  - [ ] Documentation
-  - [ ] Add attribute Max
+  - [x] Documentation
+  - [x] Add attribute Max
 - [ ] Classe Output
   - [x] TEXTOutput
   - [x] PPMOutput
-  - [ ] Ajouter Data en attribut de classe
+  - [x] Ajouter Data en attribut de classe
   - [ ] Tests
-  - [ ] Documentation
+  - [x] Documentation
 - [ ] Classe AbstractReader
   - [x] PPMReader
   - [x] TXTReader
   - [ ] Tests
-  - [ ] Documentation
+  - [x] Documentation
 - [ ] Classe Compute
   - [x] FFT
   - [x] IFFT
   - [x] DFT
   - [x] IDFT
-  - [ ] FFT(Image)
-  - [ ] Adapter à la classe Image/Pixel
-  - [ ] Transpose
-  - [ ] Gtest
-  - [ ] Documentation
+  - [x] FFT(Image)
+  - [x] Adapter à la classe Image/Pixel
+  - [x] Transpose
+  - [x] Gtest
+  - [x] Documentation
 - [x] Histogram / Gplot
-- [ ] Contour extraction 
-- [ ] Filtering with Fourier Transform
+- [x] Contour extraction 
+- [x] Filtering with Fourier Transform
 
 - [x] Choisir si on fait des pixels sur 8bits ou unsigned int
-- [ ] Gestion des exceptions
+- [x] Gestion des exceptions
   - [x] Classe Pixel
   - [x] Classe Image
-  - [ ] Classe Compute
-  - [ ] Classe Output
-  - [ ] Classe AbstractReader
+  - [x] Classe Compute
+  - [x] Classe AbstractReader
+  - [x] Classe AbstractWriter
+  - [x] Classe Transform
 
+- [ ] README
+- [ ] Nettoyer github
+- [ ] Executable comme exemple
 
