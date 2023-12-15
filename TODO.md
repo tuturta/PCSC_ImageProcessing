@@ -50,9 +50,6 @@ _PRIVATE_:
 * public FileOutput(Image& image);
 * public void save(const std::string& path);
 
-
-- [ ] Faire le diagramme de classe
-
 # 2. Coder les classes
 
 - [x] Classe Pixel
@@ -99,4 +96,6 @@ _PRIVATE_:
 - [ ] README
 - [ ] Nettoyer github
 - [ ] Executable comme exemple
+- [ ] Faire le diagramme de classe
+
 
