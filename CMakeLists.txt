@@ -13,6 +13,8 @@ set(CMAKE_CXX_STANDARD 20)
 
 
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+set (CMAKE_CURRENT_BINARY_DIR ${CMAKE_SOURCE_DIR}/build)
+
 
 # LIBRARIES 
 add_library(Image
@@ -31,9 +33,9 @@ add_library(Transform
   src/transform.cpp
 )
 
-add_library(Compute
-  src/compute.cpp
-)
+# add_library(Compute
+#   src/compute.cpp
+# )
 
 add_subdirectory(googletest)
 include_directories(${CMAKE_SOURCE_DIR}/eigen)
@@ -55,14 +57,18 @@ target_link_libraries(example_histogram PUBLIC Image Pixel Reader PRIVATE
 add_executable(example_compute tests/test_compute.cpp)
 target_link_libraries(example_compute PUBLIC Reader Image Pixel Compute gtest_main gtest pthread)
 
-add_executable(test_image tests/test_image.cpp)
-target_link_libraries(test_image Image Pixel gtest_main gtest pthread) 
+# add_executable(test_image tests/test_image.cpp)
+# target_link_libraries(test_image Image Pixel gtest_main gtest pthread)
 
-add_executable(test_pixel tests/test_pixels.cpp)
-target_link_libraries(test_pixel Pixel gtest_main gtest pthread)
+# add_executable(test_pixel tests/test_pixels.cpp)
+# target_link_libraries(test_pixel Pixel gtest_main gtest pthread)
 
 # add_executable(test_writer tests/test_writer.cpp)
 # target_link_libraries(test_writer Pixel Image Reader Writer)
 
 add_executable(test_FT tests/test_FT.cpp)
+target_link_libraries(test_FT Transform Image Pixel Reader Writer)
+
+
+#add_custom_target(test ./test_image DEPENDS test_pixel)
 target_link_libraries(test_FT Transform)

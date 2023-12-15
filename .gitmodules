@@ -8,7 +8,3 @@
 	path = gnuplot-iostream
 	url = https://github.com/dstahlke/gnuplot-iostream.git
 	branch = master
-[submodule "eigen"]
-	path = eigen
-	url = https://gitlab.com/libeigen/eigen
-	branch = master
