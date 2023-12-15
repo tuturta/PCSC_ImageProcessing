@@ -204,7 +204,7 @@ void DFT::fwd(MatrixXcd& image){
 Filter::Filter(Image& image): image_(image) {}
 ContourExtraction::ContourExtraction(Image& image): Filter(image) {
     array<size_t, 2UL> shape = image_.shape();
-    if((shape[0]>3) or shape[1]>3) throw invalid_argument("Image can not be inferior to 3x3 !");
+    if((shape[0]<3) or shape[1]<3) throw invalid_argument("Image can not be inferior to 3x3 !");
 }
 GaussianFilter::GaussianFilter(Image& image): Filter(image) {}
 GaussianFilter::GaussianFilter(Image& image, double sigma, size_t filter_size): Filter(image), sigma_(sigma), filter_size_(filter_size){
