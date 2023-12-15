@@ -30,3 +30,8 @@ TEST(PixelTest,construction_and_getset_functions){
     EXPECT_EQ(p0.get_channel_value(0),20) << "set_channel_value(channel_idx,new_val) does not did not set new_value on channel channel_idx";
     
 }
+
+int main(int argc, char **argv) {
+  testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
+}

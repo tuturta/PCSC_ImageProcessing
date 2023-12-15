@@ -3,17 +3,17 @@
 
 class Compute{
     public:
-    Compute(Image& img);
+    Compute(Image const& img);
 
     protected:
-    Image& data;
-
-    public:
-    virtual void compute()=0;
+    Image const& data;
 };
 
-class Contour_extraction: public Compute{
+class ComputeHistogram : public Compute {
     public:
-    Contour_extraction(Image& img);
-    virtual void compute() override;
+    ComputeHistogram(Image const& img,unsigned int Nbins);
+    std::vector<std::vector<double>> compute() const;
+    
+    private:
+    unsigned int Nbins;
 };

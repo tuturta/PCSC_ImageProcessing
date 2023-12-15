@@ -101,3 +101,8 @@ TEST_F(ImageTest,conversions_image_matrices){
     }
 }
 
+
+int main(int argc, char **argv) {
+  testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
+}
