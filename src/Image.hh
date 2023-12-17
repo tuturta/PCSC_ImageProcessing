@@ -1,9 +1,9 @@
 #pragma once
 #include "Pixel.hh"
-#include<vector>
-#include<array>
+#include <vector>
+#include <array>
 #include "MyExceptions.hh"
-#include<../eigen/Eigen/Dense>
+#include <../eigen/Eigen/Dense>
 
 using Eigen::MatrixXcd;
 

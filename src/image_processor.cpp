@@ -1,9 +1,10 @@
-#include"reader.hh"
-#include"Image.hh"
-#include"transform.hh"
-#include"plot_histogram.hh"
-#include"compute.hh"
-#include"writer.hh"
+#include "reader.hh"
+#include "Pixel.hh"
+#include "Image.hh"
+#include "transform.hh"
+#include "plot_histogram.hh"
+#include "compute.hh"
+#include "writer.hh"
 #include <stdexcept>
 #include <fstream>
 

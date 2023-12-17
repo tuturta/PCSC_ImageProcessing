@@ -208,7 +208,7 @@ ContourExtraction::ContourExtraction(Image& image): Filter(image) {
     if(shape[0] != shape[1]) throw RectangleImageException("Image can not be inferior to 3x3 !");
 
 }
-GaussianFilter::GaussianFilter(Image& image): Filter(image) {}
+GaussianFilter::GaussianFilter(Image& image): Filter(image), sigma_(1), filter_size_(3)  {}
 GaussianFilter::GaussianFilter(Image& image, double sigma, size_t filter_size): Filter(image), sigma_(sigma), filter_size_(filter_size){
     array<size_t, 2UL> shape = image_.shape();
     if((filter_size > shape[0]) or (filter_size > shape[1])) throw invalid_argument("The filter_size is larger than the image !");
@@ -252,8 +252,8 @@ void GaussianFilter::apply(){
     vector<MatrixXcd> images = image_.bands_as_complex_matrices();
 
     // Parameters of the filter
-    size_t filterSize = 3;  // Adjust the filter size as needed
-    double sigma(1.0);      // Adjust the sigma value as needed
+    size_t filterSize = filter_size_;  // Adjust the filter size as needed
+    double sigma = sigma_;      // Adjust the sigma value as needed
     
     // Create a 2D Gaussian filter
     MatrixXcd gaussianFilter(filterSize, filterSize);

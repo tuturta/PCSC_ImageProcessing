@@ -1,9 +1,7 @@
 #include "MyExceptions.hh"
 #include "Image.hh"
-#include<iostream>
 #include "../gnuplot-iostream/gnuplot-iostream.h"
-#include<string>
-#include<iostream>
+#include <string>
 using namespace std;
 
 /**
